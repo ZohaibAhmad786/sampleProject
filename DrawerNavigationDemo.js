@@ -24,6 +24,7 @@ const MyDrawerOptions = createDrawerNavigator({
       navigationOptions: {
        headerMode: 'none'
       },
+      
       contentComponent: MyDrawer,
       drawerWidth: Dimensions.get('window').width - 130,
       drawerPosition:'left',
