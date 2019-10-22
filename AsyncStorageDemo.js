@@ -72,18 +72,13 @@ class AuthLoadingScreen extends React.Component {
         this._bootstrapAsync();
     }
     
-
-    // Fetch the token from storage then navigate to our appropriate place
     _bootstrapAsync = async () => {
         const userToken = await AsyncStorage.getItem('userToken');
 
-        // This will switch to the App screen or Auth screen and this loading
-        // screen will be unmounted and thrown away.
         console.warn(userToken);
         this.props.navigation.navigate(userToken !== null ? 'App' : 'Auth');
     };
 
-    // Render any loading content that you like here
     render() {
         return (
             <View style={styles.container}>
@@ -153,13 +148,13 @@ const BottomTabs = createStackNavigator({
     }
 )
 
-const AppStack = createStackNavigator({ Home: HomeScreen, Other: OtherScreen });
+// const AppStack = createStackNavigator({ Home: HomeScreen, Other: OtherScreen });
 const AuthStack = createStackNavigator({ SignIn: SignInScreen });
 
 export default createAppContainer(createSwitchNavigator(
     {
         AuthLoading: AuthLoadingScreen,
-        App: BottomTabs,
+        App: AppStack2,
         Auth: AuthStack,
     },
     {

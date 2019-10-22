@@ -3,7 +3,7 @@ import { View, Text, SectionList, FlatList,TextInput, Button, Image, TouchableOp
 import { green } from 'colorette';
 import Swipeout from "react-native-swipeout";
 
-export default class App extends Component {
+export default class networkingWork extends Component {
   constructor(props) {
     super(props);
     this.dataarray = ["Ahmad", "Khan", "Usman"];
@@ -64,7 +64,9 @@ export default class App extends Component {
     console.warn(item)
     this.dataarray.push(item)
     this.setState({ newarr: [...this.dataarray] })
-    this.PostArray()
+
+    
+    //this.PostArray()
 
   }
   DispData = (item) => {
@@ -79,10 +81,10 @@ export default class App extends Component {
   render() {
 
     return (
-      <View style={{ justifyContent: 'center' }}>
-        <View style={{ borderWidth: 1, borderColor: 'red' }}>
+      <View style={{justifyContent:'center' }}>
+        <View style={{ borderWidth: 1, borderColor: 'red',alignItems:'center' }}>
           <Image source={{ uri: 'https://facebook.github.io/react/logo-og.png' }}
-            style={{ width: 400, height: 200 }} />
+            style={{ width: 100, height: 100, }} />
         </View>
 
         <View style={{ margin: 10, }}>
@@ -90,11 +92,11 @@ export default class App extends Component {
             style={{ borderColor: 'green', borderRadius: 20, borderWidth: 4 }}
             onChangeText={txt => this.setState({ textdata: txt })}></TextInput>
 
-          <Button title='Display Data' onPress={() => this.JoinData(this.state.textdata.toString())}></Button>
+          <Button title='Add  Data to Flatlist' onPress={() => this.JoinData(this.state.textdata.toString())}></Button>
         </View>
         <FlatList
-          data={this.state.mydata}
-          extraData={this.state.mydata}
+          data={this.dataarray}
+          extraData={this.dataarray}
           refreshControl={
             <RefreshControl
               refreshing={this.state.refreshing}
@@ -103,44 +105,44 @@ export default class App extends Component {
           }
           // renderSectionHeader={({ section }) => <Text style={{ backgroundColor: 'red', fontSize: 20, alignItems: 'center' }}>{section.title}</Text>}
           renderItem={({ item, index }) =>
-            <Swipeout{...{
-              autoClose: true,
-              right: [
-                {
-                  onPress: () => {
-                    const deletingRow = this.state.activeRowKey;
-                    Alert.alert(
+            // <Swipeout{...{
+            //   autoClose: true,
+            //   right: [
+            //     {
+            //       onPress: () => {
+            //         const deletingRow = this.state.activeRowKey;
+            //         Alert.alert(
 
-                      'Delete Subject',
-                      'Are you want to Delete',
-                      [
-                        { text: 'No', style: 'cancel' },
-                        {
-                          text: 'Yes', onPress: () => {
-                            this.state.mydata.splice(index, 1);
-                            this.setState(() => {
-                              return {
-                                deleteRowKey: deletingRow
-                              }
-                            })
-                          }
-                        }
-                      ],
-                      { cancelable: true }
-                    );
-                  },
-                  text: 'Delete', type: 'delete'
-                }
-              ],
+            //           'Delete Subject',
+            //           'Are you want to Delete',
+            //           [
+            //             { text: 'No', style: 'cancel' },
+            //             {
+            //               text: 'Yes', onPress: () => {
+            //                 this.state.mydata.splice(index, 1);
+            //                 this.setState(() => {
+            //                   return {
+            //                     deleteRowKey: deletingRow
+            //                   }
+            //                 })
+            //               }
+            //             }
+            //           ],
+            //           { cancelable: true }
+            //         );
+            //       },
+            //       text: 'Delete', type: 'delete'
+            //     }
+            //   ],
 
-            }
-            } >
+            // }
+            // } >
               <View>
                 <TouchableOpacity onPress={() => this.DispData(item.email)}>
-                  <Text  style={{fontSize:22}}>{item.lastname}</Text>
+                  <Text  style={{fontSize:22}}>{item}</Text>
                 </TouchableOpacity>
               </View>
-            </Swipeout>
+            // </Swipeout>
           }
           ItemSeparatorComponent={this.FlatListItemSeparator}
           keyExtractor={(item, index) => index.toString()}
