@@ -13,4 +13,4 @@ import AsyncStorageDemo from './AsyncStorageDemo';
 import networkingWork from './networkingWork';
 import AsyncStorageDemo2 from './AsyncStorageDemo2';
 
-AppRegistry.registerComponent(appName, () => DrawerNavigationDemo);
+AppRegistry.registerComponent(appName, () => AsyncStorageDemo);

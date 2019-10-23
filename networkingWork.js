@@ -105,6 +105,7 @@ export default class networkingWork extends Component {
           }
           // renderSectionHeader={({ section }) => <Text style={{ backgroundColor: 'red', fontSize: 20, alignItems: 'center' }}>{section.title}</Text>}
           renderItem={({ item, index }) =>
+        
             // <Swipeout{...{
             //   autoClose: true,
             //   right: [

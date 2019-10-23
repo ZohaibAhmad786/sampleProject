@@ -15,63 +15,18 @@ import { createStackNavigator } from 'react-navigation-stack'
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createDrawerNavigator } from "react-navigation-drawer";
 import OtherScreen from './OtherScreen';
-
-
-class SignInScreen extends React.Component {
-    static navigationOptions = {
-        title: 'Please sign in',
-    };
-
-    render() {
-        return (
-            <View style={styles.container}>
-                <Button title="Sign in!" onPress={this._signInAsync} />
-            </View>
-        );
-    }
-    componentDidMount = async () => {
-        console.warn(await AsyncStorage.getItem('userToken'));
-    }
-    _signInAsync = async () => {
-        await AsyncStorage.setItem('userToken', 'abc');
-        this.props.navigation.navigate('App');
-    };
-}
-
-class HomeScreen extends React.Component {
-    static navigationOptions = {
-        title: 'Welcome to the app!',
-    };
-
-    render() {
-        return (
-            <View style={styles.container}>
-                <Button title="Show me more of the app" onPress={this._showMoreApp} />
-                <Button title="Actually, sign me out :)" onPress={this._signOutAsync} />
-            </View>
-        );
-    }
-
-    _showMoreApp = async () => {
-        this.props.navigation.navigate('Other');
-        console.warn(await AsyncStorage.getItem('userToken'));
-
-    };
-
-    _signOutAsync = async () => {
-        await AsyncStorage.clear();
-        this.props.navigation.navigate('Auth');
-    };
-}
-
-
+import HomeScreen from './HomeScreen';
+import SignInScreen from './SignInScreen';
+import PickerDemo from './PickerDemo';
+import CheckBoxDemo from './CheckBoxDemo';
+import NetworkDemo from './NetworkDemo';
 
 class AuthLoadingScreen extends React.Component {
     constructor() {
         super();
         this._bootstrapAsync();
     }
-    
+
     _bootstrapAsync = async () => {
         const userToken = await AsyncStorage.getItem('userToken');
 
@@ -82,7 +37,7 @@ class AuthLoadingScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <ActivityIndicator />
+                <ActivityIndicator size='large'/>
                 <StatusBar barStyle="dark-content" backgroundColor='red' />
             </View>
         );
@@ -116,7 +71,8 @@ const getTabBarIcon = (navigation, focused, tintColor) => {
 
 };
 const HomeScreen1 = createStackNavigator({
-    home: HomeScreen
+    home: HomeScreen,
+    NetworkDemo: NetworkDemo,
 })
 const OtherScreen1 = createStackNavigator({
     other: OtherScreen
@@ -154,7 +110,7 @@ const AuthStack = createStackNavigator({ SignIn: SignInScreen });
 export default createAppContainer(createSwitchNavigator(
     {
         AuthLoading: AuthLoadingScreen,
-        App: AppStack2,
+        App: BottomTabs,
         Auth: AuthStack,
     },
     {
